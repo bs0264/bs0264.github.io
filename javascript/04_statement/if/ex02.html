@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>중첩 if 연습</h1>
+  <script>
+    //사용자가 입력한 세 수 중 가장 큰 수 구하기
+    let num1 = prompt("input first number >>>");
+    let num2 = prompt("input second number >>>");
+    let num3 = prompt("input third number >>>");
+
+    let max;
+    if(num1 > num2 && num1 > num3){
+      console.log(max = num1);
+    }else if(num2 > num1 && num2 > num3){
+      console.log( max = num2);
+    }else{(num3 > num1 && num3 > num2)
+      console.log( max = num3);
+    }
+    max=num1;
+    if(num2>max){
+      max=num2;
+    }
+    if(num3>max){
+      max=num3;
+    }
+    console.log(max);
+    
+    alert("가장 큰 수는" + max + "입니다.");
+  </script>
+</body>
+</html>

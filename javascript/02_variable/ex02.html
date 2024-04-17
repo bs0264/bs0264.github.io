@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Prompt 연습</h1>
+  <h3>result = <span id="result"></span></h3>
+
+  <script>
+    //prompt로 값 두 개를 입력받아 합계를 result에 출력하시오
+    let one = prompt("첫번째 숫자를 입력하세요");
+    let two = prompt("두번째 숫자를 입력하세요");
+    let result = parseInt(one) + parseInt(two);
+    document.getElementById("result").innerHTML=result;
+    
+  </script>
+</body>
+</html>

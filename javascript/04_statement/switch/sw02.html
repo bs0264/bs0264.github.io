@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>당신이 태어난 날은 <span id="yoil">땡</span>요일입니다.</h2>
+  
+  <script>
+    let year = prompt("year >>>");
+    let month = prompt("month >>>");
+    let date = prompt("date >>>");
+
+    let today= new Date(year , month-1 ,date);
+    console.log("today >>> ")
+    // let today = new Date();
+    let hour = today.getHours();
+    let day = today.getDay();
+    console.log("day : " + day);
+    let yoil = document.getElementById("yoil");
+    let answer;
+    switch(day){
+      case 1:
+        answer = "월";
+        break;
+      case 2:
+        answer = "화";
+        break;
+      case 3:
+        answer = "수";
+        break;
+      case 4:
+        answer = "목";
+        break;
+      case 5:
+        answer = "금";
+        break;
+      case 6:
+        answer = "토";
+        break;
+      case 7:
+        answer = "일";
+        break;
+
+    }
+
+    yoil.innerHTML = answer;
+  </script>
+</body>
+</html>

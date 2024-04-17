@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    textarea{
+      font-size: 18px;
+      text-align: left;
+    
+    }
+  </style>
+</head>
+<body>
+  <h1 align="center">출퇴근 교통편 설문지</h1>
+  <form action="">
+    <fieldset>
+      <legend>개인 정보 입력</legend>
+     <textarea name="Privacy" id="content" cols="20" rows="6">
+      성함:
+      나이:
+      성별:
+      거주지:
+
+     </textarea>
+     </fieldset>
+
+  </form>
+<br>
+<br>
+  <form action="">
+    <fieldset>
+      <legend>아침 출근 교통편</legend>
+      <select name="이동수단">
+        <option value="도보">도보</option>
+        <option value="버스">버스</option>
+        <option value="지하철">지하철</option>
+        <option value="자동차">자동차</option> <input type="submit">
+      </select>
+     </fieldset>
+
+  </form>
+<br>
+<br>
+<form action="">
+  <fieldset>
+    <legend>저녁 퇴근 교통편</legend>
+    <select name="이동수단">
+      <option value="도보">도보</option>
+      <option value="버스">버스</option>
+      <option value="지하철">지하철</option>
+      <option value="자동차">자동차</option> <input type="submit">
+    </select>
+   </fieldset>
+   <br>
+   <br>
+   <hr color="black">
+   <h2>설문지 만족도 조사</h2>
+   <form action="" align="center">
+    <input type="radio" name="satisfaction" value="매우 만족" id="g1">
+    <label for="g1">매우 만족</label>
+    <input type="radio" name="satisfaction" value="만족" id="g2" >
+    <label for="g2">만족</label>
+    <input type="radio" name="satisfaction" value="보통" id="g3" checked>
+    <label for="g3">보통</label>
+    <input type="radio" name="satisfaction" value="불만" id="g4">
+    <label for="g4">불만</label>
+    <input type="radio" name="satisfaction" value="매우 불만" id="g5">
+    <label for="g5">매우 불만</label>
+    <input type="submit">
+    <input type="reset">
+  </form>
+  <br>
+  <br>
+  <br>
+  <h5 align="center">응답해 주셔서 감사합니다</h5>
+</body>
+</html>

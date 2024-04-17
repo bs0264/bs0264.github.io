@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1 id="all"></h1>
+  <script> 
+  
+    let one = parseInt(prompt("1번째 숫자"));
+    let two = parseInt(prompt("2번째 숫자"));
+
+
+    document.getElementById("all").innerHTML =
+
+    "(3)" + (two % 10 * one) 
+   + "(4)" + two*Math.floor(two / 10 % 10 )
+   + "(5)" + two*Math.floor(two/100)
+   + "(6)" + (one * two);
+
+    //(3)
+
+  </script>
+</body>
+</html>

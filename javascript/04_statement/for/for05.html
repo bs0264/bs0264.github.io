@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <h1>중첩 for문</h1>
+    <h3>구구단</h3>
+
+    <script>
+        for(let i = 1; i <= 9; i++){
+            for(let j = 2; j <= 9; j++){
+                // i > 1 , j - > 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9
+                document.write(j + "*" + i + "=" + j*i + " | ");
+            }
+            document.write("<br>");
+        }
+        document.write("<hr>");
+
+
+
+    </script> -->
+
+<!-- <h1>중첩 for문</h1>
+<h3>구구단</h3> -->
+<style >
+    table{
+        width: 100%;
+    }
+</style>
+<script>
+    //변수 선언  - var   // Ecmascript 2015 (ES6) - 변수 선언 let, const
+    document.write("<table><tr>");
+    for (var i = 2; i <= 9; i++) {
+        document.write("<th>"+i+"단</th>");
+    }
+    console.log("i: " + i);
+    for(let i = 1; i <= 9; i++){
+        document.write("</tr><tr>");
+        for (let j = 2; j <= 9; j++) {
+            document.write("<td>" + j + " * " + i + " = " + j * i + "</td>");
+        }
+    }
+    document.write("</tr></table>");
+
+</script>
+</body>
+</html>
