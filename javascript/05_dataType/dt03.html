@@ -8,15 +8,86 @@
 <body>
     <h1>Array: 여러 타입의 데이터를 묶어서 보관할 수 있는 객체</h1>
 
+    <dvi id="lucky"></dvi>
     <script>
         let num1 = 3;
         let num2 = 5;
         let num3 = 7;
 
-        const a = new Array(3); // 3칸짜리 데이터 저장소 생성
-        a[0] = 3;
-        a[1] = 5;
-        a[2] = 7;
+        const myLuckyNums = new Array(3); // 3칸짜리 데이터 저장소 생성
+        myLuckyNums[0] = 3;
+        myLuckyNums[1] = 5;
+        myLuckyNums[2] = 7;
+
+        console.log(myLuckyNums);
+        console.log("myLuckyNums : ", myLuckyNums);
+        console.log("myLuckyNums : ");
+        console.log(myLuckyNums[1]);
+        console.log(myLuckyNums[2]);
+        console.log(myLuckyNums[3]); //undefined
+
+        myLuckyNums[3] = 8;
+        console.log(myLuckyNums[3]);
+        myLuckyNums[0] = 1;
+        console.log("myLuckyNums : ", myLuckyNums);
+        console.log("myLuckyNums : ", myLuckyNums.length);
+
+        // for(let i = 0; i < myLuckyNum.length ; i++){
+        //     console.log(myLuckyNums[i]);
+
+        //     let result = "";
+        //     for(let i =0; i < myLuckyNums.length; i++){
+        //         result += `<p> 행운의 숫자 ${i+1}번 : ${myLuckyNums[i]}</p>`
+        //     };
+        // }
+        // document.getElementById("lucky").innerHTML = result;
+
+        //5칸 짜리 arry 생성해서 변수 a에 저장
+
+        const a = new Array(5);
+        a[0] = 1;
+        a[1] = 2;
+        a[2] = 3;
+        a[3] = 4;
+        a[4] = 5;
+        for(let i = 0; i< a.length; i++){
+            a[i] = i + 1;
+        }
+        console.log("a : " , a);
+
+        let sum = 0
+        for(let i =0; i<a.length; i++){
+            console.log(a[i]);
+            if(a[i] % 2 != 0){
+                sum += i;
+            }
+        }
+        console.log("array의 a에 들어있는 홀수의 합: " + sum);
+        console.log("----------")
+        const days = ["yesterday" , "today" , "tomorrow"];
+        const arr = ["dream" , 77, true ,"party"];
+        console.log(days);
+        console.log(arr);
+        // let result = "";
+        // for(let i = 0; i < myLuckyNums.length; i++){
+        //     result += `<p>행운의 숫자 ${i+1}번: ${myLuckyNums[i]}</p>`;
+        // } 
+        // document.getElementById("lucky").innerHTML = result;
+
+        for(let i =0; i < days.length; i++){
+            console.log(days[i]);
+            if(days[i] == "today"){
+                console.log("i love u!");
+            }else{
+                console.log("i hate u!");
+            }
+        }
+
+        //array + array
+        const c = days + arr;
+        console.log(c);
+        console.log(typeof c);
+
     </script>
 </body>
 </html>
