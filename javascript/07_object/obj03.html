@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //class 이름: Car    
+        //속성: brand, color, price, model 
+        //생성자 만들고 자동차 4대 생성하여 myCars 배열에 넣을 것
+        //확장 for문을 이용해서 차를 한대씩 모두 출력할 것 
+
+        class Car{
+            constructor(brand , color , price , model){
+                this.brand = brand,
+                this.color = color,
+                this.price = price,
+                this.model = model;
+            }
+        }
+        let c1 = new Car("벤츠" , "black" , "2억" , "S클래스");
+        let c2 = new Car("현대" , "White" , "2천" , "아반떼");
+        let c3 = new Car("기아" , "Blue" , "4천" , "쏘렌토");
+        let c4 = new Car("포르쉐" , "Red" , "1억" , "박스터");
+
+        console.log(c1);
+        console.log(c2);
+        console.log(c3);
+        console.log(c4);
+
+        const mycars = [c1 , c2 , c3 , c4]
+        console.log(mycars);
+
+        for(let i in mycars){
+            for(let j in mycars[i]){
+            document.write(`<p> ${mycars[i][j]} </p>`)
+        }
+        document.write("<hr>");
+    }
+    </script>
+</body>
+</html>
