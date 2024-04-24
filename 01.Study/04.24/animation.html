@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle Animation</title>
+    <style>
+        #container {
+            width: 300px;
+            height: 300px;
+            border: 2px solid black;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #smallBox {
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rectangle Animation</h1>
+    <div id="container">
+        <div id="smallBox"></div>
+    </div>
+    <button onclick="startAnimation()">Start</button>
+    <button onclick="stopAnimation()">Stop</button>
+
+    <script>
+        let smallBox = document.getElementById('smallBox');
+        let container = document.getElementById('container');
+        let smallBoxWidth = parseInt(window.getComputedStyle(smallBox).getPropertyValue('width'));
+        let smallBoxHeight = parseInt(window.getComputedStyle(smallBox).getPropertyValue('height'));
+        let containerWidth = parseInt(window.getComputedStyle(container).getPropertyValue('width'));
+        let containerHeight = parseInt(window.getComputedStyle(container).getPropertyValue('height'));
+        let direction = 'right';
+        let moveSpeed = 1; // 이동 속도 (픽셀 단위)
+        let animationInterval;
+
+        function startAnimation() {
+            if (!animationInterval) {
+                animationInterval = setInterval(moveSmallBox, 10);
+            }
+        }
+
+        function stopAnimation() {
+            clearInterval(animationInterval);
+            animationInterval = null;
+        }
+
+        function moveSmallBox() {
+            let x = parseInt(window.getComputedStyle(smallBox).getPropertyValue('left'));
+            let y = parseInt(window.getComputedStyle(smallBox).getPropertyValue('top'));
+
+            if (direction === 'right') {
+                if (x + smallBoxWidth < containerWidth) {
+                    smallBox.style.left = (x + moveSpeed) + 'px';
+                } else if (y + smallBoxHeight < containerHeight) {
+                    smallBox.style.top = (y + moveSpeed) + 'px';
+                    direction = 'down';
+                }
+            } else if (direction === 'down') {
+                if (y + smallBoxHeight < containerHeight) {
+                    smallBox.style.top = (y + moveSpeed) + 'px';
+                } else if (x > 0) {
+                    smallBox.style.left = (x - moveSpeed) + 'px';
+                    direction = 'left';
+                }
+            } else if (direction === 'left') {
+                if (x > 0) {
+                    smallBox.style.left = (x - moveSpeed) + 'px';
+                } else if (y > 0) {
+                    smallBox.style.top = (y - moveSpeed) + 'px';
+                    direction = 'up';
+                }
+            } else if (direction === 'up') {
+                if (y > 0) {
+                    smallBox.style.top = (y - moveSpeed) + 'px';
+                } else if (x < containerWidth - smallBoxWidth) {
+                    smallBox.style.left = (x + moveSpeed) + 'px';
+                    direction = 'right';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

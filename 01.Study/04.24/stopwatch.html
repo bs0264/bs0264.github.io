@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch</title>
+    <style>
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stopwatch</h1>
+    <div id="stopwatch">00:00:00</div>
+    <button onclick="startStopwatch()">Start</button>
+    <button onclick="stopStopwatch()">Stop</button>
+    <button onclick="resetStopwatch()">Reset</button>
+
+    <script>
+        let startTime;
+        let elapsedTime = 0;
+        let timerInterval;
+        let stopwatchDisplay = document.getElementById('stopwatch');
+
+        function startStopwatch() {
+            if (!timerInterval) {
+                startTime = Date.now() - elapsedTime;
+                timerInterval = setInterval(updateStopwatch, 10);
+            }
+        }
+
+        function stopStopwatch() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function resetStopwatch() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            elapsedTime = 0;
+            updateDisplay();
+        }
+
+        function updateStopwatch() {
+            elapsedTime = Date.now() - startTime;
+            updateDisplay();
+        }
+
+        function updateDisplay() {
+            let milliseconds = Math.floor(elapsedTime % 1000);
+            let seconds = Math.floor(elapsedTime / 1000 % 60);
+            let minutes = Math.floor(elapsedTime / (1000 * 60) % 60);
+            let hours = Math.floor(elapsedTime / (1000 * 60 * 60) % 24);
+
+            milliseconds = milliseconds < 10 ? '00' + milliseconds : milliseconds < 100 ? '0' + milliseconds : milliseconds;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            hours = hours < 10 ? '0' + hours : hours;
+
+            stopwatchDisplay.innerText = hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Ball Game</title>
+    <style>
+        #container {
+            width: 600px;
+            height: 400px;
+            border: 2px solid black;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #ball {
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="ball"></div>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        const ball = document.getElementById('ball');
+        const containerRect = container.getBoundingClientRect();
+
+        // 공의 초기 위치 및 속도 설정
+        let ballX = containerRect.width / 2;
+        let ballY = containerRect.height - 30; // 상단에 고정
+        let velocityX = 0;
+        let velocityY = 0;
+
+        container.addEventListener('click', function(event) {
+            // 마우스 클릭 위치를 기준으로 공을 발사
+            const mouseX = event.clientX - containerRect.left;
+            const mouseY = event.clientY - containerRect.top;
+            const angle = Math.atan2(mouseY - ballY, mouseX - ballX);
+            const speed = 5; // 발사 속도
+            velocityX = Math.cos(angle) * speed;
+            velocityY = Math.sin(angle) * speed;
+        });
+
+        function moveBall() {
+            // 공의 위치 업데이트
+            ballX += velocityX;
+            ballY += velocityY;
+
+            // 공이 벽에 닿으면 튕기는 효과
+            if (ballX < 0 || ballX > containerRect.width - parseInt(window.getComputedStyle(ball).getPropertyValue('width'))) {
+                velocityX *= -1;
+            }
+            if (ballY < 0 || ballY > containerRect.height - parseInt(window.getComputedStyle(ball).getPropertyValue('height'))) {
+                velocityY *= -1;
+            }
+
+            // 공의 새로운 위치 적용
+            ball.style.left = ballX + 'px';
+            ball.style.top = ballY + 'px';
+
+            requestAnimationFrame(moveBall);
+        }
+
+        moveBall();
+    </script>
+</body>
+</html>
