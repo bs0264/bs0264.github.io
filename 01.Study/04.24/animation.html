@@ -34,6 +34,8 @@
     <script>
         let smallBox = document.getElementById('smallBox');
         let container = document.getElementById('container');
+        // 초기 크기를 가져오기 위해 CSS에서 지정된 값을 가져와야 함. 
+        //코드를 수정하여 getComputedStyle()를 사용하여 초기 크기를 가져옴
         let smallBoxWidth = parseInt(window.getComputedStyle(smallBox).getPropertyValue('width'));
         let smallBoxHeight = parseInt(window.getComputedStyle(smallBox).getPropertyValue('height'));
         let containerWidth = parseInt(window.getComputedStyle(container).getPropertyValue('width'));

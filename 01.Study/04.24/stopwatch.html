@@ -8,6 +8,20 @@
         button {
             padding: 10px 20px;
             margin: 5px;
+            background-color: green;
+            color: black;
+            font-size: 25px;
+        }
+        h1{
+            color: blue;
+            font-size: 50px;
+        }
+        #stopwatch{
+            color: black;
+            font-size: 50px;
+        }
+        #recordedTimes{
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -16,16 +30,20 @@
     <div id="stopwatch">00:00:00</div>
     <button onclick="startStopwatch()">Start</button>
     <button onclick="stopStopwatch()">Stop</button>
+    <button onclick="recordTime()">Record</button>
     <button onclick="resetStopwatch()">Reset</button>
+    <div id="recordedTimes"></div>
 
     <script>
         let startTime;
         let elapsedTime = 0;
         let timerInterval;
         let stopwatchDisplay = document.getElementById('stopwatch');
+        let recordedTimesContainer = document.getElementById('recordedTimes');
 
         function startStopwatch() {
             if (!timerInterval) {
+                //스탑워치가 멈췄다가 다시 시작할 때 올바른 시작 시간에서 계속 진행 되도록 함.
                 startTime = Date.now() - elapsedTime;
                 timerInterval = setInterval(updateStopwatch, 10);
             }
@@ -38,11 +56,19 @@
             }
         }
 
+        function recordTime() {
+            let recordedTime = stopwatchDisplay.innerText;
+            let recordElement = document.createElement('div');
+            recordElement.textContent = recordedTime;
+            recordedTimesContainer.appendChild(recordElement);
+        }
+
         function resetStopwatch() {
             clearInterval(timerInterval);
             timerInterval = null;
             elapsedTime = 0;
             updateDisplay();
+            recordedTimesContainer.innerHTML = '';
         }
 
         function updateStopwatch() {
@@ -51,9 +77,13 @@
         }
 
         function updateDisplay() {
+            //elapsedTime을 1000으로 나눈 나머지를 계산하여 남은 밀리초를 구합니다.
             let milliseconds = Math.floor(elapsedTime % 1000);
+            //elapsedTime을 1000으로 나눈 후 60으로 나눈 나머지를 계산하여 초를 구합니다.
             let seconds = Math.floor(elapsedTime / 1000 % 60);
+            //elapsedTime을 1000으로 곱한 후 60으로 나눈 나머지를 계산하여 분을 구합니다.
             let minutes = Math.floor(elapsedTime / (1000 * 60) % 60);
+            //elapsedTime을 1000 * 60 * 60으로 나눈 후 24로 나눈 나머지를 계산하여 시간을 구합니다.
             let hours = Math.floor(elapsedTime / (1000 * 60 * 60) % 24);
 
             milliseconds = milliseconds < 10 ? '00' + milliseconds : milliseconds < 100 ? '0' + milliseconds : milliseconds;

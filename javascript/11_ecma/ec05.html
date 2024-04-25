@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Rectangle{
+            constructor(height, width){
+                this.height=height;
+                this.width=width;
+            }
+            get area(){
+                return this.calcArea();
+            }
+            calcArea(){
+                return this.height*this.width;
+            }
+            
+            //객체 생성 없이 직접 사용가능한 클래스 함수
+            static print(x){
+                console.log(x.height + " / " + x.width);
+            }
+        }
+
+        const square = new Rectangle(5 , 5);
+        const pic = new Rectangle(18 , 7);
+        console.log(square.area);
+        console.log(square.calcArea());
+        // console.log(Rectangle.area); //undefined
+        // console.log(Rectangle.calcArea()); //Rectangle.calcArea is not a function
+        Rectangle.print(square);
+        Rectangle.print(pic);
+
+        // let math = new Math();
+        // Math.random();
+    </script>
+</body>
+</html>
