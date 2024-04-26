@@ -29,9 +29,13 @@
         function callback(data){
             console.log(data);
             let text = data.responseText;
-            console.log(text);
+            console.log(text); 
+
+            //string인 json을 object로 만드는 함수
             let jsonObject = JSON.parse(text);
             console.log(jsonObject);
+            //json -> string: JSON.stringify()
+            console.log(JSON.stringify(jsonObject));
             let quiz = jsonObject.quiz;
             let content = "";
             for(let field in quiz){

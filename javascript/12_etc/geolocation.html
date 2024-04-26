@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>GeoLocation: latitute(위도) / longitude(경도)</h1>
+    <p id="myLocation"></p>
+    <script>
+        let myLocation = document.getElementById("myLocation");
+
+        navigator.geolocation.getCurrentPosition(function(postion){
+            myLocation.innerHTML = `위도: ${postion.coords.latitude}, 경도: ${postion.coords.longitude}`;
+        });
+    </script>
+</body>
+</html>
