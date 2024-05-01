@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미니 게임 천국 - 개발 2팀</title>
+    <script src="../jquery/js/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: beige;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 50px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-bottom: 100px;
+            margin-top: 100px;
+        }
+        h1{
+            font-size: 50px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>미니 게임 천국 - 개발 2팀</h1>
+    <button id="shooting">슈팅 게임</button>
+    <br>
+    <button id="tetris">테트리스 게임</button>
+
+    <script>
+        
+        // 버튼 클릭 이벤트 처리
+        $(document).ready(function(){
+            $("#shooting").click(function(){
+                // 새 창에서 다른 HTML 파일 열기
+                window.open("index.html", "_blank");
+            });
+        });
+        $(document).ready(function(){
+            $("#tetris").click(function(){
+                // 새 창에서 다른 HTML 파일 열기
+                window.open("index.html", "_blank");
+            });
+        });
+    </script>
+</body>
+</html>
