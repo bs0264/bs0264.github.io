@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <h1>ajax jquery 문법</h1>
+    <button>데이터 가져와서 뿌리기</button>
+    <div>처음부터 ㅋㅋㅋ</div>
+
+    <script>
+        $(function(){
+            $('button').click(function(){
+                let url = "test.txt";
+                $.ajax({
+                    type:"get",// post , put , delete
+                    url:url, // 요청 경로
+                    // dataType: "text/html",
+                    // contentType: "application/json",
+                    success: function(result){
+                        console.log(result);
+                        print(result);
+                    },
+                    error: function(err){
+                console.log(err);
+            },
+            complete: function(){
+                console.log("난 항상 즐거워");
+            }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

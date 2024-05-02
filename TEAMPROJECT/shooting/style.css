@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+}
+
+div {
+    position: absolute;
+    top: 20px;
+}
+
+h1,
+h2 {
+    color: white;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    font-size: 70px;
+}
+
+h2 {
+    font-size: 40px;
+}
+
+canvas {
+    /* width: 800px;
+    height: 600px; */
+    border: 2px solid #fff;
+}
+
+.intro{
+    position: absolute;
+    top: 780px;
+}
+
+.intro p{
+    color: white;
+}

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>미니 게임 천국 - 개발 2팀</title>
-    <script src="../jquery/js/jquery-3.7.1.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,39 +20,31 @@
             color: white;
             border: none;
             border-radius: 4px;
-            margin-bottom: 100px;
-            margin-top: 100px;
+            margin-bottom: 10px;
+            margin-top: 10px;
         }
         h1{
             font-size: 50px;
+            margin-top: 0px;
+            margin-bottom: 0px;
         }
         button:hover {
             background-color: #45a049;
         }
-        
+        img{
+            width: 275px;
+            height: 275px;
+        }
     </style>
 </head>
 <body>
     <h1>미니 게임 천국 - 개발 2팀</h1>
-    <button id="shooting">슈팅 게임</button>
+    <a href="shooting/index.html" target="_blank"><button>슈팅 게임</button></a>
     <br>
-    <button id="tetris">테트리스 게임</button>
-
-    <script>
-        
-        // 버튼 클릭 이벤트 처리
-        $(document).ready(function(){
-            $("#shooting").click(function(){
-                // 새 창에서 다른 HTML 파일 열기
-                window.open("index.html", "_blank");
-            });
-        });
-        $(document).ready(function(){
-            $("#tetris").click(function(){
-                // 새 창에서 다른 HTML 파일 열기
-                window.open("index.html", "_blank");
-            });
-        });
-    </script>
+    <img src="../TEAMPROJECT/shooting/Shooting.png" alt="슈팅 게임">
+    <br>
+    <a href="tetris/index.html" target="_blank"><button>테트리스 게임</button></a>
+    <br>
+    <img src="../TEAMPROJECT/tetris/tetris.png" alt="이미지 설명">
 </body>
 </html>

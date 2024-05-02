@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        input {
+            width: 50px;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+            width: 100%;
+            border-spacing: 0;
+
+        }
+
+        th,
+        td {
+            text-align: center;
+            padding: 16px;
+            border: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            //row 버튼 (행추가) 클릭하면 펑션 실행 
+            $('#row').click(function () {
+                //id = table 내부 내용 초기화
+                // $('table').empty();
+                //value값 가져오기
+                let row = $('#row_num').val();
+                let col = $('#col_num').val();
+                //값을 저장할 변수 선언 및 초기화
+                let strTable = "";
+                    //for문으로 테이블 만들기
+                for (let i = 0; i < row; i++) {  //i는 input(row_num)보다 작고 ++
+                    strTable += "<tr>"; //tr 행 추가 
+                    for (let j = 0; j < col; j++) { //j는 input(col_num)보다 작고 ++
+                        strTable += "<td>" + (i + 1) + "," + (j + 1) + "</td>"; //td에 i,j값 입력 (i,j가 0부터 시작해서 +1)
+                    }
+                    strTable += "</tr>"; //tr닫기
+                }
+                // strTable += "</table>"; //table닫기
+                $('table').append(strTable); // table에 strTable넣기
+            });
+            $('#col').click(function () {
+                $('table').empty();
+                let row = $('#row_num').val();
+                let col = $('#col_num').val();
+                let strTable = "<table>";
+                for (let i = 0; i < row; i++) {
+                    strTable += "<tr>";
+                    for (let j = 0; j < col; j++) {
+                        strTable += "<th>" + (i + 1) + "," + (j + 1) + "</th>";
+                    }
+                    strTable += "</tr>";
+                }
+                strTable += "</table>";
+                $('table').append(strTable);
+            });
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <input type="text" id="row_num">
+    <button id="row">행추가</button>
+    <input type="text" id="col_num">
+    <button id="col">열추가</button>
+
+    <table></table>
+    <!-- <div id="table"> -->
+</body>
+
+</html>

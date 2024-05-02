@@ -1,4 +1,4 @@
-import BLOCKS from "./blocks.js";
+//import BLOCKS from "./blocks.js";
 
 // DOM
 const playground = document.querySelector(".playground > ul");
@@ -26,6 +26,8 @@ init()
 
 // functions
 function init() {
+    score = 0; // 점수 초기화
+    scoreDisplay.innerText = score; // 점수 표시 갱신
     tempMovingItem = { ...movingItem }; //값만 가져와서 넣음
     for (let i = 0; i < GAME_ROWS; i++) {
         prependNewLine()

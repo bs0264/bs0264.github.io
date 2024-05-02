@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ace in bluestream</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    <link rel="shortcut icon" href="/images/Ace_icon.png" type="image/x-icon">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <button id="btn">데이터 주셈 ㅋㅋ</button>
+    <div id="txt">Data here!</div>
+
+    <script>
+        $(function () {
+            $('#btn').click(function () {
+                let url = "test.json";
+                //$.ajax({
+                $.get({
+                    //type:"get", //post, put, delete
+                    url: url, //요청 경로
+                    dataType: "json",
+                    // contentType: "application/json",
+                    success: function (result) {
+                        console.log(result);
+                        print(result);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    },
+                    complete: function () {
+                        console.log("난 항상 즐거워 ㅋㅋㅋ");
+                    }
+                });
+
+            });
+            
+            const print = function(result){
+            $('#txt').html(result);
+        }
+        });
+    </script>
+</body>
+
+</html>
