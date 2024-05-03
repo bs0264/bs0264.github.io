@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.5/css/dataTables.dataTables.min.css">
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="//cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
+</head>
+<body>
+    <button>movie info</button>
+    <h2 class="test"></h2>
+    <table id="movie">
+        <tr>
+            <th>순위</th>
+            <th>영화제목</th>
+            <th>관객수</th>
+        </tr>
+    </table>
+    <hr>
+    
+    <table id="example" class="display" width="100%"></table>
+    <script>
+        let key = "85d7eb0c887b9bf19ff374f6235d9f02";
+        let today = new Date();
+        let year = today.getFullYear().toString();
+        let month = today.getMonth()+1 < 9 ? "0" + (today.getMonth()+1) : (today.getMonth()+1);
+        let date = today.getDate() < 9 ? "0" + (today.getDate()-1) : today.getDate()-1;
+        let targetDt = year + month + date;
+
+        console.log(targetDt);
+
+        let url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key="+key+"&targetDt="+targetDt;
+
+        $(function(){
+            $('button').click(function(){
+                $.ajax({
+                    type: "get",
+                    url:url,
+                    dataType:"json",
+                    success:function(result){
+                        console.log(result);
+                        print(result);
+                    }
+                });
+            });
+        });
+        const dataSet = [];
+        const print = function(result){
+            $('.test').text(result.boxOfficeResult.boxOfficeType);
+            const list = result.boxOfficeResult.dailyBoxOfficeList;
+            console.log(list);
+            $.each(list , function(idx , value){
+                console.log(idx);
+                console.log(value);
+                console.log("---------------");
+                // for(let key in val);
+                //  console.log(key);
+                //  console.log(obj[key]);
+                //  console.log("-------------");
+
+                let rnum = value.rnum;
+                let movieNm = value.movieNm;
+                let audiCnt = value.audiCnt;
+                console.log(movieNm);
+                console.log(audiCnt);
+                let tr = $('<tr>');
+                    tr.append($('<td>').text(rnum));
+                    tr.append($('<td>').text(movieNm));
+                    tr.append($('<td>').text(audiCnt));
+                        $('#movie').append(tr);
+
+                        //datable 용 dataSet 만들기
+                        let arr = new Array();
+                        arr.push(rnum);
+                        arr.push(movieNm);
+                        arr.push(audiCnt);
+                        dataSet.push(arr);
+            });
+            console.log(dataSet);
+
+            new DataTable('#example', {
+                columns: [
+                    { title: '등수' },
+                    { title: '영화제목' },
+                    { title: '관객수' }
+
+                ],
+                data: dataSet
+            }); 
+        }
+    </script>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                backgroundColor: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange']
+            }
+        });
+    </script>
+</body>
+</html>

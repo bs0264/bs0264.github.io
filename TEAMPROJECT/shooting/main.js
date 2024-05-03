@@ -16,7 +16,11 @@ RecoveryItemImg.src = "./img/heal.png"
 
 //체력 게이지 이미지 삽입
 const heartImage = new Image();
-heartImage.src = './img/Heart.png';
+heartImage.src = "./img/Heart.png";
+
+//총알 이미지 삽입
+const bulletImg = new Image();
+bulletImg.src = "./img/bullet.png";
 
 // 게임 상태 초기화
 const game = {
@@ -45,19 +49,31 @@ function drawPlayer() {
     ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
 };
 
-// 총알, 적, 회복 아이템 배열
+// 총알, 적, 회복 아이템, 별 배열
 const bullets = [];
 const enemies = [];
 const recoveryItems = [];
+const stars = [];
 
 // 총알 생성 함수
 function createBullet() {
     bullets.push({
-        x: player.x + player.width / 2,
+        x: player.x + player.width / 4.7,
         y: player.y,
-        width: 2,
-        height: 15,
-        speed: 20
+        width: 30,
+        height: 20,
+        speed: 15
+    });
+};
+
+//총알 이미지 위치시키기
+function drawBullets() {
+    bullets.forEach(bullet => {
+        ctx.save(); // 현재 그리기 상태 저장
+        ctx.translate(bullet.x + bullet.width / 2, bullet.y + bullet.height / 2); // 회전 중심점 이동
+        ctx.rotate(3 * Math.PI / 2); // 90도 회전
+        ctx.drawImage(bulletImg, -bullet.height / 2, -bullet.width / 2, bullet.height, bullet.width); // 이미지 그리기
+        ctx.restore(); // 이전 그리기 상태로 복원;
     });
 };
 
@@ -94,6 +110,15 @@ function drawRecoveryItem() {
     });
 };
 
+//배경에 별 생성 함수
+function creatStars() {
+    const starWidth = 1.3;
+    const starHeight = 1.3;
+    const starX = Math.random() * (canvas.width - starWidth);
+    const starY = -starHeight;
+    stars.push({ x: starX, y: starY, width: starWidth, height: starHeight });
+};
+
 // 총알 이동 함수
 function moveBullets() {
     bullets.forEach((bullet, index) => {
@@ -124,9 +149,20 @@ function moveItems() {
         // 아이템이 화면 밖으로 나가면 제거
         if (item.y > canvas.height) {
             recoveryItems.splice(index, 1);
-        }
+        };
     });
-}
+};
+
+//별 이동 함수
+function moveStars() {
+    stars.forEach((star, index) => {
+        star.y += 0.9; // 별 이동 속도
+        //별이 화면 밖으로 나가면 제거
+        if (star.y > canvas.height) {
+            stars.splice(index, 1);
+        };
+    });
+};
 
 // 충돌 감지 함수
 function checkCollisions() {
@@ -156,7 +192,8 @@ function checkCollisions() {
             // 여기서는 간단히 플레이어의 생명을 1 감소시킵니다.
             enemies.splice(i, 1);
             decreasePlayerHealth(); // 플레이어 체력 감소
-            console.log('Player hit!');
+            document.getElementById("note").scrollTop = document.getElementById("note").scrollHeight;
+            document.getElementById("note").innerHTML += ' "Player is under attack!"' + "\n";
         };
     };
 };
@@ -170,11 +207,16 @@ function checkItemCollisions() {
             player.y + player.height > recoveryItems[i].y) {
             // 플레이어와 아이템이 충돌한 경우 플레이어의 체력 회복하고 아이템 제거
             recoveryItems.splice(i, 1);
+            document.getElementById("note").scrollTop = document.getElementById("note").scrollHeight;
+            if (game.playerHealth.currentHealth < game.playerHealth.maxHealth) {
+                document.getElementById("note").innerHTML += ' "Player recovered!" ' + "\n";
+            } else {
+                document.getElementById("note").innerHTML += ' "Alredy full!" ' + "\n";
+            }
             increasePlayerHealth(); // 플레이어 체력 회복
-            console.log('Player recovered!');
-        }
-    }
-}
+        };
+    };
+};
 
 // 플레이어 체력 증가 함수
 function increasePlayerHealth() {
@@ -182,8 +224,8 @@ function increasePlayerHealth() {
     // 최대 체력을 초과하지 않도록 제한
     if (game.playerHealth.currentHealth > game.playerHealth.maxHealth) {
         game.playerHealth.currentHealth = game.playerHealth.maxHealth;
-    }
-}
+    };
+};
 
 // 플레이어 체력 감소 함수
 function decreasePlayerHealth() {
@@ -214,33 +256,42 @@ function drawPlayerHealth() {
 // 게임 결과 확인 함수
 function checkGameResult() {
     if (game.playerHealth.currentHealth <= 0) {
-        console.log('Game over! Score: ' + game.score);
+        document.getElementById("note").innerHTML = "Game over! Score: " + game.score + '\n' + "F5키 또는 새로고침 버튼을 눌러 게임을 다시 시작하세요!" + '\n';
+        if (game.score > 10000) {
+            document.getElementById("note").innerHTML += "와 10000점 돌파! 진짜 잘하시네요~~~";
+        }
         // 게임 오버 처리를 원하는 대로 추가하세요.
         // 여기서는 간단히 새로고침하도록 구현합니다.
-        window.location.reload();
+        cancelAnimationFrame(animation);
     };
 };
 
-
-
+let animation;
 // 게임 루프
 function gameLoop() {
+
+    //다음 프레임 요청
+    animation = requestAnimationFrame(gameLoop);
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    //별 그리기
+    ctx.fillStyle = '#fff';
+    stars.forEach(star => {
+        ctx.fillRect(star.x, star.y, star.width, star.height);
+    });
+
+    // 총알 그리기
+    drawBullets();
 
     //플레이어 그리기
     drawPlayer();
 
     // 적 그리기
-    drawEnemies()
-
-    // 총알 그리기
-    ctx.fillStyle = '#fff';
-    bullets.forEach(bullet => {
-        ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
-    });
+    drawEnemies();
 
     // 아이템 그리기
-    drawRecoveryItem()
+    drawRecoveryItem();
 
     // 충돌 감지
     checkCollisions();
@@ -254,11 +305,16 @@ function gameLoop() {
     // 적 생성
     if (Math.random() < game.enemySpawnRate) {
         createEnemy();
-    }
+    };
 
     // 아이템 생성
-    if (Math.random() < 0.003) { // 적당한 확률로 아이템 생성
+    if (Math.random() < 0.001) { // 적당한 확률로 아이템 생성
         createRecoveryItem();
+    };
+
+    //별 생성
+    if (Math.random() < 0.11) {
+        creatStars();
     }
 
     // 적 이동
@@ -270,8 +326,11 @@ function gameLoop() {
     // 아이템 이동
     moveItems();
 
+    //별 이동
+    moveStars()
+
     // 적 속도와 생성 속도를 레벨에 따라 증가
-    game.enemySpeed += 0.001;
+    game.enemySpeed += 0.1;
     game.enemySpawnRate += 0.000005;
 
     // 점수 표시
@@ -280,42 +339,41 @@ function gameLoop() {
     ctx.fillText('Score: ' + game.score, 10, 30);
 
     //플레이어 체력 표시
-    drawPlayerHealth()
+    drawPlayerHealth();
 
-
-    //다음 프레임 요청
-    requestAnimationFrame(gameLoop);
 };
+
+// 게임 시작
+gameLoop();
 
 // 키보드 이벤트 리스너
 window.addEventListener('keydown', function (event) {
     switch (event.key) {
-        case 'ArrowLeft':
+        case 'a':
             if (player.x > 0) {
                 player.x -= player.speed;
             }
             break;
-        case 'ArrowRight':
+        case 'd':
             if (player.x < canvas.width - player.width) {
                 player.x += player.speed;
             }
             break;
-        case 'ArrowDown':
+        case 's':
             if (player.y < canvas.height - player.height) {
                 player.y += player.speed;
             }
             break;
-        case 'ArrowUp':
+        case 'w':
             if (player.y > 0) {
                 player.y -= player.speed;
             }
             break;
-        case ' ':
+        case 'j':
             createBullet();
             break;
 
     };
 });
 
-// 게임 시작
-gameLoop();
+

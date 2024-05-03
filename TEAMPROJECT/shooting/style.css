@@ -6,11 +6,16 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #000;
+    position: relative;
 }
 
 div {
     position: absolute;
     top: 20px;
+}
+
+.canv {
+    top: 170px;
 }
 
 h1,
@@ -30,16 +35,18 @@ h2 {
 }
 
 canvas {
-    /* width: 800px;
-    height: 600px; */
     border: 2px solid #fff;
 }
 
-.intro{
-    position: absolute;
+.ex {
     top: 780px;
 }
 
-.intro p{
+.ex p {
     color: white;
+}
+
+#note {
+    display: inline-block;
+    font-size: 20px;
 }

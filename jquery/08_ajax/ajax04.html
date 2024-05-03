@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <h1>ajax parse xml</h1>
+    <button>친구 목록 가져오기</button>
+    <script>
+        $(function () {
+                $('button').on("click", function () {
+                    $.ajax({
+                        type: "get",
+                        url: "name.xml",
+                        // dataType: "application/xml", //memetype
+                        success: function (resp) {
+                            // let xmlDoc = $.parseXML(resp);
+                            console.log(resp);
+                            // let name = resp.getElementsByTagName("name")[0];
+                            // console.log(name);
+                            let out;
+                            $(resp).find('friend').each(function(index){
+                                out = `<div><h2> ${$(this).find('name').text()}</h2>`;
+                                out += `<p>${$(this).find('language').text()}</p></div>`;
+                                // $('<h2>').text($(this).find('name').text());
+                                console.log(out);
+                                $('body').append(out);
+                            });
+                        }
+                    });
+                })
+            });
+    </script>
+</body>
+</html>

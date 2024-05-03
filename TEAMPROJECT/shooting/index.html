@@ -7,7 +7,7 @@
     <title>Shooting Game</title>
     <link rel="stylesheet" href="./style.css">
     <style>
-       
+
     </style>
 </head>
 
@@ -16,16 +16,17 @@
         <h1>SHOOTING</h1>
         <h2>GAME</h2>
     </div>
-    
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
-    <script src="./main.js"></script>
 
-    <div class="intro">
+    <div class="canv"><canvas id="gameCanvas" width="800" height="600"></canvas></div>
+
+    <div class="ex">
+        <textarea name="notice" id="note" cols="70" rows="6" readonly></textarea>
         <p>조작법</p>
-        <p>&uarr;, &darr;, &larr;, &rarr;: 상, 하, 좌, 우 이동</p>
-        <p>spacebar: 공격</p>
+        <p>w, a, s, d: 상, 하, 좌, 우 이동</p>
+        <p>j: 공격</p>
         <p>적들을 공격하세요!</p>
     </div>
+    <script src="./main.js"></script>
 </body>
 
 </html>
